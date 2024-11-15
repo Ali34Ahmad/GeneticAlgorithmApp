@@ -9,9 +9,10 @@ import androidx.compose.ui.unit.dp
 
 
 data class Sizing(
-    val default: Dp =0.dp,
-    val small16: Dp =16.dp,
-    val large146: Dp =146.dp,
+    val default: Dp = 0.dp,
+    val small11: Dp=1.dp,
+    val small16: Dp = 16.dp,
+    val large146: Dp = 146.dp,
 )
 val LocalSizing = staticCompositionLocalOf { Sizing() }
 

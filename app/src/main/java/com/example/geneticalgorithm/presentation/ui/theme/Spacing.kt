@@ -11,6 +11,7 @@ data class Spacing(
     val default:Dp=0.dp,
     val small4:Dp=4.dp,
     val small8:Dp=8.dp,
+    val small12: Dp=12.dp,
     val medium16:Dp=16.dp,
     val medium24:Dp=24.dp,
     val large32:Dp=32.dp,
