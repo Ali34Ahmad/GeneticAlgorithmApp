@@ -1,5 +1,6 @@
 package com.example.geneticalgorithm.core.component.generation
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,8 +9,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
+import com.example.geneticalgorithm.core.ext.toOrdinal
 import com.example.geneticalgorithm.presentation.ui.helper.DarkAndLightModePreview
 import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme
+import com.example.geneticalgorithm.presentation.ui.theme.primaryTextColorDark
+import com.example.geneticalgorithm.presentation.ui.theme.primaryTextColorLight
 
 @Composable
 fun GenerationHeader(
@@ -17,15 +22,29 @@ fun GenerationHeader(
     bestFitness: Int,
     modifier: Modifier = Modifier
 ) {
-    Row(modifier = modifier,
-        horizontalArrangement = Arrangement.SpaceBetween) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
         Text(
-            text = generationNumber.toString(),
+            text = generationNumber.toOrdinal(),
             style = MaterialTheme.typography.labelMedium,
+            color = if (!isSystemInDarkTheme())
+                primaryTextColorLight
+            else
+                primaryTextColorDark,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
         )
         Text(
-            text = bestFitness.toString(),
+            text = "Best Fitness: $bestFitness",
             style = MaterialTheme.typography.labelMedium,
+            color = if (!isSystemInDarkTheme())
+                primaryTextColorLight
+            else
+                primaryTextColorDark,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
         )
 
     }
@@ -33,9 +52,9 @@ fun GenerationHeader(
 
 @DarkAndLightModePreview
 @Composable
-fun GenerationHeaderPreview(){
-    GeneticAlgorithmTheme{
-        Surface{
+fun GenerationHeaderPreview() {
+    GeneticAlgorithmTheme {
+        Surface {
             GenerationHeader(
                 generationNumber = 1,
                 bestFitness = 120,

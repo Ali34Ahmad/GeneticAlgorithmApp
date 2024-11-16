@@ -11,6 +11,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import com.example.geneticalgorithm.presentation.ui.theme.sizing
 import com.example.geneticalgorithm.presentation.ui.theme.spacing
+import kotlin.math.max
 
 @Composable
 fun GenerationTableCell(
@@ -30,6 +31,7 @@ fun GenerationTableCell(
             style = textStyle,
             modifier = Modifier.padding(MaterialTheme.spacing.small12),
             overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
         )
     }
 }

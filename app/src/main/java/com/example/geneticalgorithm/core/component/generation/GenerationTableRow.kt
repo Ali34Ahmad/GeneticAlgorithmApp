@@ -22,11 +22,11 @@ fun GenerationTableRow(
             modifier = Modifier.weight(1f),
         )
         GenerationTableCell(
-            text = individual.house.location.name.toAppropriateFormat(),
+            text = individual.house.location.toAppropriateFormat(),
             modifier = Modifier.weight(1f),
         )
         GenerationTableCell(
-            text = individual.house.numberOfRooms.name.toAppropriateFormat(),
+            text = individual.house.numberOfRooms.toAppropriateFormat(),
             modifier = Modifier.weight(1f),
         )
         GenerationTableCell(
