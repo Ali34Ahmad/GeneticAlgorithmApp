@@ -5,30 +5,35 @@ import com.example.geneticalgorithm.algorithm.House
 import com.example.geneticalgorithm.algorithm.HouseFeature
 import com.example.geneticalgorithm.algorithm.Individual
 import com.example.geneticalgorithm.core.models.PieChartDetailsItem
+import com.example.geneticalgorithm.presentation.ui.theme.blue
+import com.example.geneticalgorithm.presentation.ui.theme.cyan
+import com.example.geneticalgorithm.presentation.ui.theme.green
+import com.example.geneticalgorithm.presentation.ui.theme.red
+import com.example.geneticalgorithm.presentation.ui.theme.yellow
 
 val pieChartDetailsItems = listOf(
     PieChartDetailsItem(
-        color = Color.Blue,
+        color = blue,
         name = "City Center",
         numberOfSales = 32
     ),
     PieChartDetailsItem(
-        color = Color.Red,
+        color = red,
         name = "City Edge",
         numberOfSales = 50
     ),
     PieChartDetailsItem(
-        color = Color.Cyan,
+        color = cyan,
         name = "Town",
         numberOfSales = 10
     ),
     PieChartDetailsItem(
-        color = Color.Green,
+        color = green,
         name = "Village",
         numberOfSales = 100
     ),
     PieChartDetailsItem(
-        color = Color.Yellow,
+        color = yellow,
         name = "Suburb",
         numberOfSales = 104
     ),

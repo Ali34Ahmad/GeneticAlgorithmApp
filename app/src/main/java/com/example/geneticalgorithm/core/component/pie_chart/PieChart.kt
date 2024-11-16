@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,24 +28,14 @@ import com.example.geneticalgorithm.core.models.PieChartDetailsItem
 import com.example.geneticalgorithm.presentation.ui.helper.DarkAndLightModePreview
 import com.example.geneticalgorithm.presentation.ui.helper.pieChartDetailsItems
 import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme
-
-
-val colors = listOf(
-    Color.Red,
-    Color.Blue,
-    Color.Yellow,
-    Color.Green,
-    Color.Magenta,
-    Color.Cyan,
-    Color.Gray,
-)
+import com.example.geneticalgorithm.presentation.ui.theme.sizing
 
 @Composable
 fun PieChart(
     pieChartDetails: List<PieChartDetailsItem>,
     modifier: Modifier = Modifier,
-    radiusOuter: Dp = 146.dp,
-    chartBarWidth: Dp = 16.dp,
+    radiusOuter: Dp = MaterialTheme.sizing.large146,
+    chartBarWidth: Dp = MaterialTheme.sizing.small16,
     animationDuration: Int = 1000,
 ) {
     val data= pieChartDetails.associate { it.name to it.numberOfSales }
@@ -88,7 +79,7 @@ fun PieChart(
             ) {
                 floatValue.forEachIndexed { index, value ->
                     drawArc(
-                        color = colors[index],
+                        color = pieChartDetails[index].color,
                         startAngle = lastValue,
                         sweepAngle = value,
                         useCenter = false,

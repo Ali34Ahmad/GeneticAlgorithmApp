@@ -30,7 +30,11 @@ fun GenerationTable(
             )
         )
         repeat(generation.size) {
-            GenerationTableRow(individual = generation[it])
+            GenerationTableRow(
+                individual = generation[it],
+                index = it,
+                lastIndex = generation.lastIndex
+            )
         }
     }
 }

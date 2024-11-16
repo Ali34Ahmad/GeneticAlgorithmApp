@@ -27,7 +27,7 @@ fun GenerationHeader(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            text = generationNumber.toOrdinal(),
+            text = "${generationNumber.toOrdinal()} generation",
             style = MaterialTheme.typography.labelMedium,
             color = if (!isSystemInDarkTheme())
                 primaryTextColorLight

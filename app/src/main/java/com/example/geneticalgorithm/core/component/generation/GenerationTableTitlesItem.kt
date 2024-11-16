@@ -19,11 +19,17 @@ fun GenerationTableTitleItem(
     modifier: Modifier = Modifier,
 ) {
     Row(modifier = modifier) {
-        titles.forEach{
+        titles.forEachIndexed { index, titles ->
+            val weight = when {
+                index == 0 -> 0.7f
+                index == 1 -> 1f
+                index == 2 -> 0.7f
+                else -> 0.5f
+            }
             GenerationTableCell(
-                text = it,
+                text = titles,
                 textStyle = MaterialTheme.typography.labelLarge,
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.weight(weight),
             )
         }
     }

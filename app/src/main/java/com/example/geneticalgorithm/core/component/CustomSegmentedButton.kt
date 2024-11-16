@@ -3,7 +3,10 @@ package com.example.geneticalgorithm.core.component
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonColors
+import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -35,7 +38,10 @@ fun CustomSegmentedButton(
                 onClick = { onOptionClick(index) },
                 modifier = Modifier.fillMaxWidth(),
                 selected = selectedOption == index,
-                shape = getShapeByIndex(index, options.size)
+                shape = getShapeByIndex(index, options.size),
+//                colors = SegmentedButtonDefaults.colors(
+//                    activeContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+//                )
             ) {
                 Text(
                     text = option,

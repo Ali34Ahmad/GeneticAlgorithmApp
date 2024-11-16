@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextOverflow
 import com.example.geneticalgorithm.core.models.PieChartDetailsItem
 import com.example.geneticalgorithm.presentation.ui.helper.DarkAndLightModePreview
 import com.example.geneticalgorithm.presentation.ui.helper.pieChartDetailsItems
@@ -42,6 +43,8 @@ fun PieChartDetailsItem(
                 .padding(start = MaterialTheme.spacing.small12)
                 .weight(1f),
             style = MaterialTheme.typography.labelMedium,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
         )
         Text(
             text = "${pieChartDetailsItem.numberOfSales}%",
