@@ -7,9 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
-import com.example.geneticalgorithm.algorithm.House
-import com.example.geneticalgorithm.algorithm.HouseFeature
-import com.example.geneticalgorithm.algorithm.Individual
+import com.example.geneticalgorithm.core.models.House
+import com.example.geneticalgorithm.core.models.HouseFeature
+import com.example.geneticalgorithm.core.models.Individual
 import com.example.geneticalgorithm.core.ext.toAppropriateFormat
 import com.example.geneticalgorithm.presentation.ui.helper.DarkAndLightModePreview
 import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme

@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
 import com.example.geneticalgorithm.core.models.PieChartDetailsItem
 import com.example.geneticalgorithm.presentation.ui.helper.DarkAndLightModePreview
-import com.example.geneticalgorithm.presentation.ui.helper.pieChartDetailsItems
+import com.example.geneticalgorithm.presentation.ui.helper.pieChartDetailsItemsFake
 import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme
 import com.example.geneticalgorithm.presentation.ui.theme.sizing
 import com.example.geneticalgorithm.presentation.ui.theme.spacing
@@ -60,7 +60,7 @@ fun PieChartDetailsItemPreview() {
     GeneticAlgorithmTheme {
         Surface {
             PieChartDetailsItem(
-                pieChartDetailsItem = pieChartDetailsItems[0]
+                pieChartDetailsItem = pieChartDetailsItemsFake[0]
             )
         }
     }

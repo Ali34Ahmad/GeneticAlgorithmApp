@@ -6,47 +6,39 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.geneticalgorithm.core.constants.generationTableTitles
-import com.example.geneticalgorithm.presentation.main.generation.GenerationSection
-import com.example.geneticalgorithm.presentation.main.generation.GenerationUiState
-import com.example.geneticalgorithm.presentation.main.statistics.StatisticsSection
-import com.example.geneticalgorithm.presentation.main.statistics.StatisticsUiState
-import com.example.geneticalgorithm.presentation.ui.helper.generation
-import com.example.geneticalgorithm.presentation.ui.helper.pieChartDetailsItems
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.geneticalgorithm.presentation.main.MainScreen
+import com.example.geneticalgorithm.presentation.main.MainUiState
+import com.example.geneticalgorithm.presentation.main.MainViewModel
 import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme
-import com.example.geneticalgorithm.presentation.ui.theme.spacing
+import kotlinx.coroutines.flow.StateFlow
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            var selectedOption by remember { mutableIntStateOf(0) }
+//        enableEdgeToEdge()
 
+        val viewModel: MainViewModel = MainViewModel()
+
+        setContent {
             GeneticAlgorithmTheme {
+                val uiState= viewModel.uiState.collectAsStateWithLifecycle()
+
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Surface(
                         modifier = Modifier.padding(innerPadding),
                         tonalElevation = 1.dp
                     ) {
-                        GenerationSection(
-                            uiState = GenerationUiState(
-                                generation = generation,
-                            ),
-                            generationTableTitles = generationTableTitles,
-                            modifier = Modifier.padding(MaterialTheme.spacing.medium16)
+                        MainScreen(
+                            uiState = uiState.value,
+                            onSegmentedButtonOptionClick = viewModel::onSegmentedButtonOptionClick,
+                            onAdvancedSearchClick = viewModel::showAdvancedSearchDialog,
+                            onRunAlgorithmClick = viewModel::runAlgorithm,
                         )
                     }
                 }

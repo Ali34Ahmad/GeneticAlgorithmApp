@@ -1,8 +1,8 @@
 package org.example.genetic_algorithm
 
-import com.example.geneticalgorithm.algorithm.House
-import com.example.geneticalgorithm.algorithm.HouseFeature
-import com.example.geneticalgorithm.algorithm.Individual
+import com.example.geneticalgorithm.core.models.House
+import com.example.geneticalgorithm.core.models.HouseFeature
+import com.example.geneticalgorithm.core.models.Individual
 import org.example.dataset.HouseFitness
 import org.example.dataset.ProhibitedFeatures
 import kotlin.random.Random
@@ -39,7 +39,7 @@ class GeneticAlgorithm {
          *  It is considered as the goal fitness that will stop the Algorithm from working.
          * @author Ali Mansoura.
          */
-        private fun getTheTargetFitness(): Int {
+        fun getTheTargetFitness(): Int {
             //first we remove the unacceptable features
             val types = HouseFitness.types - ProhibitedFeatures.prohibitedTypes.toSet()
             val locations = HouseFitness.locations - ProhibitedFeatures.prohibitedLocations.toSet()
@@ -94,7 +94,7 @@ class GeneticAlgorithm {
          * This function will create the initial generation of  individuals.
          * @author Ali Ahmad
          */
-        private fun createInitialGeneration(): List<Individual> {
+        fun createInitialGeneration(): List<Individual> {
             val population = mutableListOf<Individual>()
             repeat(POPULATION_SIZE) {
                 val individual = createGenome()
@@ -109,75 +109,9 @@ class GeneticAlgorithm {
          * @param percentage this is a  float value: 0.1 => 10%.
          * @author Ali Mansoura
          */
-        private fun selection(generation: List<Individual>, percentage: Float = 0.1f): List<Individual> {
+        fun selection(generation: List<Individual>, percentage: Float = 0.1f): List<Individual> {
             val size: Int = (generation.size * percentage).toInt()
             return generation.subList(0, size)
-        }
-
-        fun runAlgorithm(): List<Individual> {
-            // Create the initial generation
-            val currentGeneration = createInitialGeneration().toMutableList()
-            currentGeneration.sortDescending()
-            val newGeneration = mutableListOf<Individual>()
-
-            // Define termination condition (target fitness or maximum generations)
-            val targetFitness = getTheTargetFitness()
-            println("the target fitness : $targetFitness")
-            var generationCount = 0
-            var bestFitness = currentGeneration.first().fitness
-
-            println("---------------------------initial generation ------------------------------")
-
-            // Run the algorithm loop
-            while (bestFitness < targetFitness) {
-                //print the generation information
-                println("we are in the # $generationCount generation.")
-                println("the best fitness: $bestFitness")
-                currentGeneration.forEach{
-                    println("$it ${it.fitness}")
-                }
-                println("---------------------------new generation ------------------------------")
-                generationCount++
-                // Update best fitness
-
-                val selectedParents = selection(currentGeneration)
-
-                //Add the fittest 10% to the newGeneration
-                newGeneration.addAll(selectedParents)
-
-                // Crossover: Create new individuals by combining parents' genes
-                val s = (90 * POPULATION_SIZE) / 100
-                val offspring = mutableListOf<Individual>()
-                repeat(s) {
-                    //select the parent from individuals that have the maximum 50% fitness.
-                    val randomParent1Index = Random.nextInt(currentGeneration.size / 2)
-                    val randomParent2Index = Random.nextInt(currentGeneration.size / 2)
-                    val parent1 = currentGeneration[randomParent1Index]
-                    val parent2 = currentGeneration[randomParent2Index]
-                    // Mating both parents
-                    offspring.add(parent1.mate(parent2))
-                }
-
-                // Update the new generation
-                newGeneration.addAll(offspring)
-
-                newGeneration.sortDescending()
-
-                // need this codes
-                currentGeneration.clear()
-                currentGeneration.addAll(newGeneration)
-                newGeneration.clear()
-
-                bestFitness = currentGeneration.first().fitness
-
-            }
-            println("we are in the # $generationCount generation.")
-            println("the best fitness: $bestFitness")
-            currentGeneration.forEach{
-                println("$it ${it.fitness}")
-            }
-            println("---------------------------final generation ------------------------------")
-            return currentGeneration
         }
     }
 }

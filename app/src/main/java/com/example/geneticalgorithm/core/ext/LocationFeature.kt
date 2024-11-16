@@ -1,6 +1,6 @@
 package com.example.geneticalgorithm.core.ext
 
-import com.example.geneticalgorithm.algorithm.HouseFeature
+import com.example.geneticalgorithm.core.models.HouseFeature
 
 
 fun HouseFeature.Location.toAppropriateFormat(): String {

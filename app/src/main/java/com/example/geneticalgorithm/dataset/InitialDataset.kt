@@ -1,6 +1,6 @@
 package org.example.dataset
 
-import com.example.geneticalgorithm.algorithm.HouseFeature
+import com.example.geneticalgorithm.core.models.HouseFeature
 
 /**
  * this is the initial dataset that represents the preferred customers houses.

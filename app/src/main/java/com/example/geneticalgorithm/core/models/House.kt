@@ -1,9 +1,9 @@
-package com.example.geneticalgorithm.algorithm
+package com.example.geneticalgorithm.core.models
 
 import org.example.dataset.ProhibitedFeatures
-import com.example.geneticalgorithm.algorithm.HouseFeature.HouseType
-import com.example.geneticalgorithm.algorithm.HouseFeature.Location
-import com.example.geneticalgorithm.algorithm.HouseFeature.NumberOfRooms
+import com.example.geneticalgorithm.core.models.HouseFeature.HouseType
+import com.example.geneticalgorithm.core.models.HouseFeature.Location
+import com.example.geneticalgorithm.core.models.HouseFeature.NumberOfRooms
 
 data class House(
     var numberOfRooms: NumberOfRooms,

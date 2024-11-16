@@ -1,6 +1,6 @@
 package org.example.dataset
 
-import com.example.geneticalgorithm.algorithm.HouseFeature
+import com.example.geneticalgorithm.core.models.HouseFeature
 
 /**
  * This class will show the current statistics about house types,
