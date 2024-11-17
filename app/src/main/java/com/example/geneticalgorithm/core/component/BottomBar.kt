@@ -37,7 +37,7 @@ fun BottomBar(
             )
             FilledButton(
                 onClick = onRunAlgorithmClick,
-                textId = R.string.run_algorithm,
+                textId = R.string.filter_suggestions,
                 modifier = Modifier.weight(1f),
             )
 
