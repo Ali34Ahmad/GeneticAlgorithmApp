@@ -12,7 +12,10 @@ data class Sizing(
     val default: Dp = 0.dp,
     val small11: Dp=1.dp,
     val small16: Dp = 16.dp,
+    val medium40: Dp = 40.dp,
     val large146: Dp = 146.dp,
+    val large170: Dp = 170.dp,
+    val large238: Dp = 238.dp,
 )
 val LocalSizing = staticCompositionLocalOf { Sizing() }
 

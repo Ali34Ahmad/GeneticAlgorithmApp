@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Genetic Algorithm</string>
+    <string name="houses">Houses</string>
+    <string name="buy_now">Buy now</string>
+    <string name="rooms">Rooms</string>
+    <string name="room">Room</string>
+    <string name="customize_filters">Customize filters</string>
 </resources>

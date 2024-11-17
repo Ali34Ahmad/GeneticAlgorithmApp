@@ -9,7 +9,6 @@ val tertiaryLight = Color(0xFF2385D1)
 
 val surfaceLight=Color(0xFFF7F9FF)
 
-
 val primaryDark = Color(0xFF566CE5)
 val secondaryDark = Color(0xFF163DCF)
 val secondaryContainerDark=Color(0xFF262642)
