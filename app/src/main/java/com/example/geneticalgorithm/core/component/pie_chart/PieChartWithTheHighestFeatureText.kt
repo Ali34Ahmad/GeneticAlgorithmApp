@@ -12,10 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import com.example.geneticalgorithm.core.models.PieChartDetailsItem
 import com.example.geneticalgorithm.presentation.ui.helper.DarkAndLightModePreview
-import com.example.geneticalgorithm.presentation.ui.helper.pieChartDetailsItems
+import com.example.geneticalgorithm.presentation.ui.helper.pieChartDetailsItemsFake
 import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme
 
 @Composable
@@ -73,7 +72,7 @@ fun PieChartWithTheHighestFeatureTextPreview() {
     GeneticAlgorithmTheme {
         Surface {
             PieChartWithTheHighestFeatureText(
-                pieChartDetails = pieChartDetailsItems,
+                pieChartDetails = pieChartDetailsItemsFake,
                 modifier = Modifier.padding(40.dp)
             )
         }

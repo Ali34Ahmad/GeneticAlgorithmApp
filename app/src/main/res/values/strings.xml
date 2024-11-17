@@ -5,4 +5,9 @@
     <string name="rooms">Rooms</string>
     <string name="room">Room</string>
     <string name="customize_filters">Customize filters</string>
+    <string name="generation">Generation</string>
+    <string name="statistics">Statistics</string>
+    <string name="run_algorithm">Run algorithm</string>
+    <string name="advanced_filter">Advanced filter</string>
+    <string name="loading_generation_data">Loading generation data</string>
 </resources>

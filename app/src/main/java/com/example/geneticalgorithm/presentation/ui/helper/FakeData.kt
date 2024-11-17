@@ -1,9 +1,8 @@
 package com.example.geneticalgorithm.presentation.ui.helper
 
-import androidx.compose.ui.graphics.Color
-import com.example.geneticalgorithm.algorithm.House
-import com.example.geneticalgorithm.algorithm.HouseFeature
-import com.example.geneticalgorithm.algorithm.Individual
+import com.example.geneticalgorithm.core.models.House
+import com.example.geneticalgorithm.core.models.HouseFeature
+import com.example.geneticalgorithm.core.models.Individual
 import com.example.geneticalgorithm.core.models.PieChartDetailsItem
 import com.example.geneticalgorithm.presentation.ui.theme.blue
 import com.example.geneticalgorithm.presentation.ui.theme.cyan
@@ -11,7 +10,7 @@ import com.example.geneticalgorithm.presentation.ui.theme.green
 import com.example.geneticalgorithm.presentation.ui.theme.red
 import com.example.geneticalgorithm.presentation.ui.theme.yellow
 
-val pieChartDetailsItems = listOf(
+val pieChartDetailsItemsFake = listOf(
     PieChartDetailsItem(
         color = blue,
         name = "City Center",
@@ -39,7 +38,7 @@ val pieChartDetailsItems = listOf(
     ),
 )
 
-val generation = listOf(
+val generationFake = listOf(
     Individual(
         house = House(
             type = HouseFeature.HouseType.DELOX,

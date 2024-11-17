@@ -1,4 +1,4 @@
-package com.example.geneticalgorithm.algorithm
+package com.example.geneticalgorithm.core.models
 
 import org.example.genetic_algorithm.GeneticAlgorithm
 import kotlin.random.Random

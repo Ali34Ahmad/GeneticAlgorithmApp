@@ -19,14 +19,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.geneticalgorithm.core.models.PieChartDetailsItem
 import com.example.geneticalgorithm.presentation.ui.helper.DarkAndLightModePreview
-import com.example.geneticalgorithm.presentation.ui.helper.pieChartDetailsItems
+import com.example.geneticalgorithm.presentation.ui.helper.pieChartDetailsItemsFake
 import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme
 import com.example.geneticalgorithm.presentation.ui.theme.sizing
 
@@ -101,7 +100,7 @@ fun PieChartPreview() {
     GeneticAlgorithmTheme {
         Surface {
             PieChart(
-                pieChartDetails = pieChartDetailsItems,
+                pieChartDetails = pieChartDetailsItemsFake,
                 modifier = Modifier.padding(40.dp)
             )
         }

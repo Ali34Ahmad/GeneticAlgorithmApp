@@ -6,10 +6,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.geneticalgorithm.algorithm.Individual
+import com.example.geneticalgorithm.core.models.Individual
 import com.example.geneticalgorithm.core.constants.generationTableTitles
 import com.example.geneticalgorithm.presentation.ui.helper.DarkAndLightModePreview
-import com.example.geneticalgorithm.presentation.ui.helper.generation
+import com.example.geneticalgorithm.presentation.ui.helper.generationFake
 import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme
 import com.example.geneticalgorithm.presentation.ui.theme.tableTitleBackGroundDark
 import com.example.geneticalgorithm.presentation.ui.theme.tableTitleBackGroundLight
@@ -45,7 +45,7 @@ fun GenerationTablePreview() {
     GeneticAlgorithmTheme {
         Surface {
             GenerationTable(
-                generation = generation,
+                generation = generationFake,
                 titles = generationTableTitles,
             )
         }

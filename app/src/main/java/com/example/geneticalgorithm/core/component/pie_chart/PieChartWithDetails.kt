@@ -8,10 +8,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.example.geneticalgorithm.core.models.PieChartDetailsItem
 import com.example.geneticalgorithm.presentation.ui.helper.DarkAndLightModePreview
-import com.example.geneticalgorithm.presentation.ui.helper.pieChartDetailsItems
+import com.example.geneticalgorithm.presentation.ui.helper.pieChartDetailsItemsFake
 import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme
 import com.example.geneticalgorithm.presentation.ui.theme.sizing
 import com.example.geneticalgorithm.presentation.ui.theme.spacing
@@ -51,7 +50,7 @@ fun PieChartWithDetailsPreview() {
     GeneticAlgorithmTheme {
         Surface {
             PieChartWithDetails(
-                pieChartDetails = pieChartDetailsItems,
+                pieChartDetails = pieChartDetailsItemsFake,
             )
         }
     }

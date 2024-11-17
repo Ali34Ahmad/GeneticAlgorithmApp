@@ -10,16 +10,19 @@ import androidx.compose.ui.unit.dp
 
 data class Sizing(
     val default: Dp = 0.dp,
-    val small11: Dp=1.dp,
+    val small1: Dp = 1.dp,
+    val small2: Dp=2.dp,
     val small16: Dp = 16.dp,
     val medium40: Dp = 40.dp,
     val large146: Dp = 146.dp,
     val large170: Dp = 170.dp,
     val large238: Dp = 238.dp,
+    val large48: Dp = 48.dp,
 )
-val LocalSizing = staticCompositionLocalOf { Sizing() }
+
+val LocalSizing = staticCompositionLocalOf { Sizing(large48 = 48.dp,) }
 
 val MaterialTheme.sizing
     @Composable
     @ReadOnlyComposable
-    get()= LocalSizing.current
+    get() = LocalSizing.current
