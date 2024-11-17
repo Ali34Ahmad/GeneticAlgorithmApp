@@ -25,10 +25,12 @@ import com.example.geneticalgorithm.R
 import com.example.geneticalgorithm.core.component.CustomSegmentedButton
 import com.example.geneticalgorithm.core.component.pie_chart.PieChartWithDetails
 import com.example.geneticalgorithm.core.constants.SegmentedButtonOptions
+import com.example.geneticalgorithm.presentation.main.CircleProgressBar
 import com.example.geneticalgorithm.presentation.main.NoDataAvailable
 import com.example.geneticalgorithm.presentation.ui.helper.DarkAndLightModePreview
 import com.example.geneticalgorithm.presentation.ui.helper.pieChartDetailsItemsFake
 import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme
+import com.example.geneticalgorithm.presentation.ui.theme.sizing
 import com.example.geneticalgorithm.presentation.ui.theme.spacing
 import kotlinx.coroutines.launch
 
@@ -63,7 +65,15 @@ fun StatisticsSection(
                 containerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
             )
         ) {
-            if (pieChartDetails.isEmpty()) {
+            if (uiState.isStatisticsLoading) {
+                CircleProgressBar(
+                    size = MaterialTheme.sizing.large48,
+                    textId = R.string.loading_generation_data,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(MaterialTheme.spacing.medium24)
+                )
+            } else if (pieChartDetails.isEmpty()) {
                 NoDataAvailable(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -119,6 +129,7 @@ fun StatisticsSectionPreview() {
                     pieChartLocationDetails = pieChartDetailsItemsFake,
                     pieChartRoomsDetails = pieChartDetailsItemsFake,
                     pieChartTypeDetails = pieChartDetailsItemsFake,
+                    isStatisticsLoading = false,
                 ),
                 onSegmentedButtonOptionClick = { selectedOption = it },
                 modifier = Modifier.padding(MaterialTheme.spacing.medium16),

@@ -16,10 +16,12 @@ import com.example.geneticalgorithm.R
 import com.example.geneticalgorithm.core.component.generation.GenerationHeader
 import com.example.geneticalgorithm.core.component.generation.GenerationTable
 import com.example.geneticalgorithm.core.constants.generationTableTitles
+import com.example.geneticalgorithm.presentation.main.CircleProgressBar
 import com.example.geneticalgorithm.presentation.main.NoDataAvailable
 import com.example.geneticalgorithm.presentation.ui.helper.DarkAndLightModePreview
 import com.example.geneticalgorithm.presentation.ui.helper.generationFake
 import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme
+import com.example.geneticalgorithm.presentation.ui.theme.sizing
 import com.example.geneticalgorithm.presentation.ui.theme.spacing
 
 @Composable
@@ -40,7 +42,15 @@ fun GenerationSection(
                 containerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
             )
         ) {
-            if (uiState.generation.isEmpty()) {
+            if (uiState.isGenerationLoading) {
+                CircleProgressBar(
+                    size = MaterialTheme.sizing.large48,
+                    textId = R.string.loading_generation_data,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(MaterialTheme.spacing.medium24)
+                )
+            } else if (uiState.generation.isEmpty()) {
                 NoDataAvailable(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -57,6 +67,8 @@ fun GenerationSection(
                                 horizontal = MaterialTheme.spacing.small12,
                                 vertical = MaterialTheme.spacing.small8,
                             ),
+                        isWorkingOnNewGeneration=uiState.isWorkingOnNewGeneration,
+                        targetFitness=uiState.targetFitness,
                     )
                     GenerationTable(
                         generation = uiState.generation.filter { it.fitness != 0 }
@@ -77,7 +89,10 @@ fun GenerationSectionPreview() {
             GenerationSection(
                 uiState = GenerationUiState(
                     generation = generationFake,
-                    generationNumber = 1
+                    generationNumber = 1,
+                    isGenerationLoading = false,
+                    isWorkingOnNewGeneration = true,
+                    targetFitness = 157,
                 ),
                 generationTableTitles = generationTableTitles,
                 modifier = Modifier.padding(MaterialTheme.spacing.medium16)

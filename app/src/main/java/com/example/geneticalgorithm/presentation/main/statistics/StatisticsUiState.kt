@@ -9,10 +9,12 @@ data class StatisticsUiState(
     val pieChartLocationDetails: List<PieChartDetailsItem>,
     val pieChartTypeDetails: List<PieChartDetailsItem>,
     val pieChartRoomsDetails: List<PieChartDetailsItem>,
+    val isStatisticsLoading: Boolean,
 )
 fun MainUiState.toStatisticsUiState()= StatisticsUiState(
     selectedOption = this.selectedOption,
     pieChartLocationDetails = this.pieChartLocationDetails,
     pieChartTypeDetails = this.pieChartTypeDetails,
-    pieChartRoomsDetails = this.pieChartRoomsDetails
+    pieChartRoomsDetails = this.pieChartRoomsDetails,
+    isStatisticsLoading=this.isStatisticsLoading
 )
