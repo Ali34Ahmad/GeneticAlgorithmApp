@@ -31,7 +31,7 @@ fun OutlinedButtonPreview() {
         Surface {
             OutlinedButton(
                 onClick = {},
-                textId = R.string.filter_suggestions,
+                textId = R.string.advanced_filter,
             )
         }
     }

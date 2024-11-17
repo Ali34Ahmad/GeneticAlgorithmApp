@@ -55,34 +55,15 @@ class MainViewModel : ViewModel() {
         val newGeneration = mutableListOf<Individual>()
 
         // Define termination condition (target fitness or maximum generations)
-        _uiState.update {
-            it.copy(
-            )
-        }
-        Log.v("GA : Target fitness", uiState.value.targetFitness.toString())
         var generationCount = 0
         var bestFitness = currentGeneration.first().fitness
-
-        Log.v(
-            "GA :,",
-            "---------------------------initial generation ------------------------------"
-        )
 
         // Run the algorithm loop
         viewModelScope.launch {
             while (bestFitness < uiState.value.targetFitness) {
                 updateIsWorkingOnNextGeneration(true)
                 delay(10000L)
-                //print the generation information
-                Log.v("GA :GenerationNumber ", generationCount.toString())
-                Log.v("GA : Best Fitness:", bestFitness.toString())
-                currentGeneration.forEach {
-                    Log.v("GA : Generation", "$it ${it.fitness}")
-                }
-                Log.v(
-                    "GA :,",
-                    "---------------------------new generation ------------------------------"
-                )
+
                 generationCount++
                 // Update best fitness
 
@@ -128,13 +109,6 @@ class MainViewModel : ViewModel() {
                 updateIsGenerationLoading(false)
             }
         }
-
-        Log.v("GA :GenerationNumber ", generationCount.toString())
-        Log.v("GA : Best Fitness:", bestFitness.toString())
-        currentGeneration.forEach {
-            Log.v("GA : Generation", "$it ${it.fitness}")
-        }
-        println("---------------------------final generation ------------------------------")
     }
 
     private fun updateIsGenerationLoading(isLoading: Boolean) {

@@ -32,12 +32,12 @@ fun BottomBar(
         ) {
             OutlinedButton(
                 onClick = onAdvancedSearchClick,
-                textId = R.string.run_algorithm,
+                textId = R.string.advanced_filter,
                 modifier = Modifier.weight(1f),
             )
             FilledButton(
                 onClick = onRunAlgorithmClick,
-                textId = R.string.filter_suggestions,
+                textId = R.string.run_algorithm,
                 modifier = Modifier.weight(1f),
             )
 

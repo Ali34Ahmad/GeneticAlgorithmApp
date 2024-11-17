@@ -3,6 +3,6 @@
     <string name="generation">Generation</string>
     <string name="statistics">Statistics</string>
     <string name="run_algorithm">Run algorithm</string>
-    <string name="filter_suggestions">Filter suggestions</string>
+    <string name="advanced_filter">Advanced filter</string>
     <string name="loading_generation_data">Loading generation data</string>
 </resources>
