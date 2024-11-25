@@ -1,8 +1,7 @@
 package com.example.geneticalgorithm.core.models
 
 import androidx.annotation.DrawableRes
-import com.example.geneticalgorithm.algorithm.House
-import com.example.geneticalgorithm.algorithm.HouseFeature
+
 
 data class DisplayedHouse(
     @DrawableRes val image: Int,

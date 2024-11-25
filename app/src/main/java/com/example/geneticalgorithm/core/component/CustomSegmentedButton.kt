@@ -1,6 +1,7 @@
 package com.example.geneticalgorithm.core.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -21,6 +22,8 @@ import androidx.compose.ui.graphics.Shape
 import com.example.geneticalgorithm.core.constants.SegmentedButtonOptions
 import com.example.geneticalgorithm.presentation.ui.helper.DarkAndLightModePreview
 import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme
+import com.example.geneticalgorithm.presentation.ui.theme.sizing
+import com.example.geneticalgorithm.presentation.ui.theme.spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

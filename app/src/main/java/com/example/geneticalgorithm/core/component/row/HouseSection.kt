@@ -21,7 +21,7 @@ import com.example.geneticalgorithm.core.component.card.HouseCard
 import com.example.geneticalgorithm.core.models.DisplayedHouse
 import com.example.geneticalgorithm.presentation.ui.theme.spacing
 import com.example.geneticalgorithm.R
-import com.example.geneticalgorithm.algorithm.HouseFeature
+import com.example.geneticalgorithm.core.models.HouseFeature
 import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme
 
 @Composable

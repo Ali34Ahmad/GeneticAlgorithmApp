@@ -10,4 +10,8 @@
     <string name="run_algorithm">Run algorithm</string>
     <string name="advanced_filter">Advanced filter</string>
     <string name="loading_generation_data">Loading generation data</string>
+    <string name="customize_filters_subtitle">Customize your generation creation by selecting specific house features.</string>
+    <string name="select_all">Select all</string>
+    <string name="cancel">cancel</string>
+    <string name="apply">apply</string>
 </resources>

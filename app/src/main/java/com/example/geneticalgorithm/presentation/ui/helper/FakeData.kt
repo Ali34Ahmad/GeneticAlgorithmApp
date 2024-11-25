@@ -1,5 +1,6 @@
 package com.example.geneticalgorithm.presentation.ui.helper
 
+import com.example.geneticalgorithm.core.models.FilterItemData
 import com.example.geneticalgorithm.core.models.House
 import com.example.geneticalgorithm.core.models.HouseFeature
 import com.example.geneticalgorithm.core.models.Individual
@@ -9,6 +10,7 @@ import com.example.geneticalgorithm.presentation.ui.theme.cyan
 import com.example.geneticalgorithm.presentation.ui.theme.green
 import com.example.geneticalgorithm.presentation.ui.theme.red
 import com.example.geneticalgorithm.presentation.ui.theme.yellow
+import org.example.dataset.HouseFitness
 
 val pieChartDetailsItemsFake = listOf(
     PieChartDetailsItem(
@@ -110,3 +112,37 @@ val generationFake = listOf(
     ),
 
 )
+fun getAllData():List<FilterItemData>{
+    val data = mutableListOf<FilterItemData>()
+    HouseFeature.Location.entries.forEach {
+        data.add(
+            FilterItemData(
+                text = it.name,
+                number = HouseFitness.locations.getValue(it),
+                isChecked = false,
+                type = 0
+            )
+        )
+    }
+    HouseFeature.HouseType.entries.forEach{
+        data.add(
+            FilterItemData(
+                text = it.name,
+                number = HouseFitness.types.getValue(it),
+                isChecked = false,
+                type = 1
+            )
+        )
+    }
+    HouseFeature.NumberOfRooms.entries.forEach{
+        data.add(
+            FilterItemData(
+                text = it.name,
+                number = HouseFitness.numberOfRooms.getValue(it),
+                isChecked = false,
+                type = 2
+            )
+        )
+    }
+    return data.toList()
+}

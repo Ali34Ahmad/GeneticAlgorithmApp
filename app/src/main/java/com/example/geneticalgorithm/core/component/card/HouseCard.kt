@@ -36,8 +36,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.geneticalgorithm.R
-import com.example.geneticalgorithm.algorithm.HouseFeature
 import com.example.geneticalgorithm.core.models.DisplayedHouse
+import com.example.geneticalgorithm.core.models.HouseFeature
 import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme
 import com.example.geneticalgorithm.presentation.ui.theme.primaryTextColorLight
 import com.example.geneticalgorithm.presentation.ui.theme.sizing
