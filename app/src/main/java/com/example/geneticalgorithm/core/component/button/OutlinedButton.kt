@@ -14,11 +14,13 @@ import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme
 fun OutlinedButton(
     onClick: () -> Unit,
     @StringRes textId: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isDisable:Boolean=false,
 ) {
     androidx.compose.material3.OutlinedButton(
         modifier = modifier,
-        onClick = onClick
+        onClick = onClick,
+        enabled = !isDisable,
     ) {
         Text(text = stringResource(id = textId))
     }

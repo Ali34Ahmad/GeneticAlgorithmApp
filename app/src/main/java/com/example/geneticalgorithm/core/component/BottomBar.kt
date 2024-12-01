@@ -18,7 +18,8 @@ import com.example.geneticalgorithm.presentation.ui.theme.spacing
 fun BottomBar(
     onAdvancedSearchClick: () -> Unit,
     onRunAlgorithmClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isDisable:Boolean=false,
 ) {
     Box(modifier = modifier.background(MaterialTheme.colorScheme.surface)) {
         Row(
@@ -34,11 +35,13 @@ fun BottomBar(
                 onClick = onAdvancedSearchClick,
                 textId = R.string.advanced_filter,
                 modifier = Modifier.weight(1f),
+                isDisable = isDisable
             )
             FilledButton(
                 onClick = onRunAlgorithmClick,
                 textId = R.string.run_algorithm,
                 modifier = Modifier.weight(1f),
+                isDisable=isDisable
             )
 
         }

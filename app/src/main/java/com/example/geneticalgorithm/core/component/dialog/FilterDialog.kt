@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,7 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -35,7 +35,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import com.example.geneticalgorithm.R
 import com.example.geneticalgorithm.core.component.CustomSegmentedButton
 import com.example.geneticalgorithm.core.component.check_box.FilterItem
@@ -50,106 +49,163 @@ import com.example.geneticalgorithm.presentation.ui.theme.spacing
 fun FilterDialog(
     @StringRes title: Int,
     @StringRes subtitle: Int,
-    @StringRes buttonText: Int ,
-    onSelectedAll: (Boolean) -> Unit,
-    onCancel: () -> Unit,
-    apply: () -> Unit,
-    onItemSelected: (FilterItemData) -> Unit,
-    items: List<FilterItemData>,
+    @StringRes buttonText: Int,
+    onSelectAllLocationCheckChange: (Boolean) -> Unit,
+    onSelectAllTypeCheckChange: (Boolean) -> Unit,
+    onSelectAllRoomsCheckChange: (Boolean) -> Unit,
+    onCancelButtonClick: () -> Unit,
+    onConfirmButtonClick: () -> Unit,
+    onLocationItemSelected: (index:Int) -> Unit,
+    onTypeItemSelected: (index:Int) -> Unit,
+    onRoomsItemSelected: (index:Int) -> Unit,
+    locationItems: List<FilterItemData>,
+    typeItems: List<FilterItemData>,
+    roomsItems: List<FilterItemData>,
     segmentedButtons: List<String>,
-    selectedOption: Int,
-    onOptionSelected: (Int) -> Unit,
+    segmentedButtonSelectedOption: Int,
+    onSegmentedButtonOptionSelected: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    isSelectedAll: Boolean = false,
+    selectAllLocationFilters: Boolean,
+    selectAllTypeFilters: Boolean,
+    selectAllRoomsFilters: Boolean,
 ) {
-    Dialog(onDismissRequest = onCancel) {
+    val selectAllFilter= when (segmentedButtonSelectedOption) {
+        0 -> selectAllLocationFilters
+        1 -> selectAllTypeFilters
+        2 -> selectAllRoomsFilters
+        else -> selectAllLocationFilters
+    }
+    val onSelectAllCheckChange=when(segmentedButtonSelectedOption){
+        0 -> onSelectAllLocationCheckChange
+        1 -> onSelectAllTypeCheckChange
+        2 -> onSelectAllRoomsCheckChange
+        else -> onSelectAllLocationCheckChange
+    }
+
+    val onItemCheckChange=when(segmentedButtonSelectedOption){
+        0 -> onLocationItemSelected
+        1 -> onTypeItemSelected
+        2 -> onRoomsItemSelected
+        else -> onLocationItemSelected
+    }
+
+    val items=when(segmentedButtonSelectedOption){
+        0 -> locationItems
+        1 -> typeItems
+        2 -> roomsItems
+        else -> locationItems
+    }
+
+
+
+
+    Dialog(onDismissRequest = onCancelButtonClick) {
         Card(
             modifier = modifier,
             shape = RoundedCornerShape(MaterialTheme.sizing.medium24),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh)
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(MaterialTheme.spacing.medium24)
-            ) {
-                Text(
-                    text = stringResource(id = title),
-                    style = MaterialTheme.typography.headlineSmall,
-                )
-                Spacer(Modifier.height(MaterialTheme.spacing.medium16))
-                Text(
-                    text = stringResource(subtitle),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Spacer(Modifier.height(MaterialTheme.spacing.medium24))
-                //segmented button row
-                CustomSegmentedButton(
-                    modifier = Modifier.fillMaxWidth(),
-                    options = segmentedButtons,
-                    selectedOption = selectedOption,
-                    onOptionClick = onOptionSelected
-                )
-                Spacer(Modifier.height(MaterialTheme.spacing.medium16))
-                //selected all
-                Row(
-                    modifier = Modifier.fillMaxWidth()
-                        .clickable {
-                            onSelectedAll(!isSelectedAll)
-                        },
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center,
+            Column {
+                Column(
+                    modifier = Modifier
+                        .padding(
+                            start = MaterialTheme.spacing.medium16,
+                            end = MaterialTheme.spacing.medium16,
+                            top = MaterialTheme.spacing.medium16,
+                        )
+                        .fillMaxWidth()
                 ) {
                     Text(
-                        text = stringResource(R.string.select_all),
-                        style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.W700
+                        text = stringResource(id = title),
+                        style = MaterialTheme.typography.headlineSmall,
                     )
-                    Spacer(Modifier.weight(1f))
-                    Checkbox(checked = isSelectedAll, onCheckedChange = { onSelectedAll(it) })
+                    Spacer(Modifier.height(MaterialTheme.spacing.medium16))
+                    Text(
+                        text = stringResource(subtitle),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Spacer(Modifier.height(MaterialTheme.spacing.medium24))
+                    //segmented button row
+                    CustomSegmentedButton(
+                        modifier = Modifier.fillMaxWidth(),
+                        options = segmentedButtons,
+                        selectedOption = segmentedButtonSelectedOption,
+                        onOptionClick = onSegmentedButtonOptionSelected
+                    )
+                    Spacer(Modifier.height(MaterialTheme.spacing.small8))
                 }
-                Spacer(Modifier.height(MaterialTheme.spacing.medium16))
-                // filters section
-                LazyColumn(
-                    modifier = Modifier.fillMaxWidth()
-                        .height(MaterialTheme.sizing.large146),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    items(
-                        items.filter { it.type == selectedOption }
+
+                Column {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                onSelectAllCheckChange(!selectAllLocationFilters)
+                            }
+                            .padding(horizontal = MaterialTheme.spacing.medium16),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center,
                     ) {
-                        HorizontalDivider(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = MaterialTheme.spacing.small8),
-                            color = MaterialTheme.colorScheme.outlineVariant
-                        )
-                        FilterItem(
-                            filterItemData = it,
-                            onCheckedChanged = onItemSelected
-                        )
-                    }
-                }
-                // buttons
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    TextButton(onClick = onCancel) {
                         Text(
-                            text = stringResource(R.string.cancel),
-                            style = MaterialTheme.typography.labelLarge
+                            text = stringResource(R.string.select_all),
+                            style = MaterialTheme.typography.bodyLarge,
+                            fontWeight = FontWeight.W700
                         )
+                        Spacer(Modifier.weight(1f))
+                        Checkbox(checked = selectAllFilter, onCheckedChange = { onSelectAllCheckChange(it) })
                     }
-                    Spacer(Modifier.width(MaterialTheme.spacing.small8))
-                    TextButton(onClick = apply) {
-                        Text(
-                            text = stringResource(buttonText),
-                            style = MaterialTheme.typography.labelLarge
-                        )
+                    // filters section
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(MaterialTheme.sizing.large146),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        items(
+                            items.size
+                        ) {index->
+
+                            HorizontalDivider(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(
+                                        horizontal = MaterialTheme.spacing.medium16
+                                    ),
+                                color = MaterialTheme.colorScheme.outlineVariant
+                            )
+                            FilterItem(
+                                filterItemData = items[index],
+                                onCheckedChanged = { onItemCheckChange(index) },
+                                innerPadding = PaddingValues(
+                                    horizontal = MaterialTheme.spacing.medium16,
+                                    vertical = MaterialTheme.spacing.small8
+                                ),
+                            )
+                        }
+                    }
+                    // buttons
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(MaterialTheme.spacing.medium16),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        TextButton(onClick = onCancelButtonClick) {
+                            Text(
+                                text = stringResource(R.string.cancel),
+                                style = MaterialTheme.typography.labelLarge
+                            )
+                        }
+                        Spacer(Modifier.width(MaterialTheme.spacing.small8))
+                        TextButton(onClick = onConfirmButtonClick) {
+                            Text(
+                                text = stringResource(buttonText),
+                                style = MaterialTheme.typography.labelLarge
+                            )
+                        }
                     }
                 }
             }
@@ -168,44 +224,52 @@ fun FilterDialogPreview() {
         val items = remember {
             data.toMutableStateList()
         }
-        val segmentedButtons = listOf("Location","Type","Rooms")
-        var selectedOption by remember{
+        val segmentedButtons = listOf("Location", "Type", "Rooms")
+        var selectedOption by remember {
             mutableIntStateOf(0)
         }
         Surface {
             FilterDialog(
-                buttonText =  R.string.apply,
-                onOptionSelected = {
+                buttonText = R.string.apply,
+                onSegmentedButtonOptionSelected = {
                     selectedOption = it
                 },
-                selectedOption = selectedOption,
+                segmentedButtonSelectedOption = selectedOption,
                 segmentedButtons = segmentedButtons,
                 modifier = Modifier.padding(16.dp),
                 title = R.string.customize_filters,
                 subtitle = R.string.customize_filters_subtitle,
-                isSelectedAll = selectedAll,
-                onSelectedAll = {
+                selectAllLocationFilters = selectedAll,
+                locationItems = items,
+                onLocationItemSelected = {
+//                    val index = items.indexOf(it)
+//                    items[index] = it.copy(isChecked = !it.isChecked)
+//                    if (items.all { it.isChecked }) {
+//                        selectedAll = true
+//                    }
+//                    if (items.any { !it.isChecked } && selectedAll) {
+//                        selectedAll = false
+//                    }
+                },
+                onCancelButtonClick = {
+                    items.forEach {
+                        it.isChecked = false
+                    }
+                },
+                onConfirmButtonClick = {},
+                selectAllTypeFilters = true,
+                selectAllRoomsFilters = true,
+                onSelectAllLocationCheckChange={
                     selectedAll = it
                     for (i in 0 until items.size)
                         items[i] = items[i].copy(isChecked = it)
                 },
-                items = items,
-                onItemSelected = {
-                    val index = items.indexOf(it)
-                    items[index] = it.copy(isChecked = !it.isChecked)
-                    if(items.all{it.isChecked}){
-                        selectedAll = true
-                    }
-                    if(items.any{!it.isChecked} && selectedAll){
-                        selectedAll = false
-                    }
-                },
-                onCancel = {
-                    items.forEach{
-                        it.isChecked = false
-                    }
-                },
-                apply = {},
+                onSelectAllTypeCheckChange={},
+                onSelectAllRoomsCheckChange={},
+                onRoomsItemSelected = {},
+                onTypeItemSelected = {},
+                roomsItems = data,
+                typeItems = data,
             )
         }
 

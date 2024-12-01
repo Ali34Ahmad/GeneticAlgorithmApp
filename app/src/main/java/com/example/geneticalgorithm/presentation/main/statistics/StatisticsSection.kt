@@ -77,12 +77,13 @@ fun StatisticsSection(
                 NoDataAvailable(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(MaterialTheme.spacing.medium24)
+                        .padding(MaterialTheme.spacing.medium24),
+                    text = R.string.data_not_available,
                 )
             } else {
                 Column {
                     CustomSegmentedButton(
-                        options = SegmentedButtonOptions.statisticsOption,
+                        options = SegmentedButtonOptions.HouseFeatures,
                         selectedOption = uiState.selectedOption,
                         onOptionClick = {
                             coroutineScope.launch {

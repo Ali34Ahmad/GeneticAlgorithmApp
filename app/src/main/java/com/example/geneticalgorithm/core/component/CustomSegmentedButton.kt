@@ -1,13 +1,9 @@
 package com.example.geneticalgorithm.core.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SegmentedButton
-import androidx.compose.material3.SegmentedButtonColors
-import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -19,11 +15,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.style.TextOverflow
 import com.example.geneticalgorithm.core.constants.SegmentedButtonOptions
 import com.example.geneticalgorithm.presentation.ui.helper.DarkAndLightModePreview
 import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme
-import com.example.geneticalgorithm.presentation.ui.theme.sizing
-import com.example.geneticalgorithm.presentation.ui.theme.spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,12 +37,11 @@ fun CustomSegmentedButton(
                 modifier = Modifier.fillMaxWidth(),
                 selected = selectedOption == index,
                 shape = getShapeByIndex(index, options.size),
-//                colors = SegmentedButtonDefaults.colors(
-//                    activeContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-//                )
             ) {
                 Text(
                     text = option,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
                 )
             }
         }
@@ -78,7 +72,7 @@ fun CustomSegmentedButtonPreview() {
     GeneticAlgorithmTheme {
         Surface {
             CustomSegmentedButton(
-                options = SegmentedButtonOptions.statisticsOption,
+                options = SegmentedButtonOptions.HouseFeatures,
                 selectedOption = selectedOption,
                 onOptionClick = { selectedOption = it },
             )

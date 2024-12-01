@@ -10,3 +10,4 @@ fun HouseFeature.Location.toAppropriateFormat(): String {
     val secondPart = this.name.substring(underScoreIndex + 1, this.name.length)
     return firstPart.toAppropriateFormat() + " " + secondPart.toAppropriateFormat()
 }
+

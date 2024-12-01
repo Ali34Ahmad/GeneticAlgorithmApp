@@ -22,8 +22,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,6 +38,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.geneticalgorithm.R
+import com.example.geneticalgorithm.core.component.button.FilledButton
+import com.example.geneticalgorithm.core.ext.toAppropriateFormat
 import com.example.geneticalgorithm.core.models.DisplayedHouse
 import com.example.geneticalgorithm.core.models.HouseFeature
 import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme
@@ -46,44 +50,36 @@ import com.example.geneticalgorithm.presentation.ui.theme.spacing
 @Composable
 fun HouseCard(
     house: DisplayedHouse,
-    onBuyButtonClick: (DisplayedHouse) -> Unit,
+    onBuyButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var disabled = remember{
-        mutableStateOf(false)
-    }
-    val cardAlpha = animateFloatAsState(
-            targetValue = if (disabled.value) 0.7f else 1f,
-            label = ""
-    )
-    val cardElevation = animateDpAsState(
-        targetValue = if(disabled.value) 0.dp else MaterialTheme.spacing.small2, label = ""
-    )
+//    var disabled by remember {
+//        mutableStateOf(false)
+//    }
+//    val cardAlpha = animateFloatAsState(
+//        targetValue = if (disabled) 0.7f else 1f,
+//        label = ""
+//    )
+//    val cardElevation = animateDpAsState(
+//        targetValue = if (disabled) 0.dp else MaterialTheme.spacing.small2, label = ""
+//    )
     ElevatedCard(
         modifier = modifier
             .width(MaterialTheme.sizing.large170)
-            .height(MaterialTheme.sizing.large238)
-            .graphicsLayer {
-                alpha = cardAlpha.value
-            }
+//            .graphicsLayer {
+//                alpha = cardAlpha.value
+//            }
         ,
         shape = RoundedCornerShape(MaterialTheme.spacing.small8),
         colors = CardDefaults.elevatedCardColors(
             containerColor = Color(0xFBFBFFFF),
         ),
-        elevation = CardDefaults.elevatedCardElevation(
-            defaultElevation = cardElevation.value
-        )
+
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Transparent)
-        ) {
+        Column {
             Image(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.55f),
+                    .height(100.dp),
                 painter = painterResource(house.image),
                 contentScale = ContentScale.Crop,
                 contentDescription = null
@@ -98,58 +94,44 @@ fun HouseCard(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                val numberOfRooms = house.numberOfRooms.toString().substringAfter("R")
-                val numberOfRoomsText = if(house.numberOfRooms == HouseFeature.NumberOfRooms.R1)
-                    numberOfRooms + stringResource(R.string.room)
-                else numberOfRooms + stringResource(R.string.rooms)
+
 
                 Text(
-                    house.location.toString(),
+                    house.location.toAppropriateFormat(),
                     style = TextStyle(
                         fontSize = MaterialTheme.typography.labelSmall.fontSize,
                         fontWeight = FontWeight.W500,
                         color = primaryTextColorLight
                     ),
 
-                )
+                    )
                 Text(
-                    text = numberOfRoomsText,
-                    style = TextStyle(
-                        fontSize = MaterialTheme.typography.bodySmall.fontSize,
-                        fontWeight = FontWeight.W400
-                    ),
+                    text = house.numberOfRooms.toAppropriateFormat(),
+                    style = MaterialTheme.typography.bodySmall,
                     color = Color(0xB2B2B2FF),
                 )
             }
             Text(
-                house.type.toString(),
+                house.type.name.toAppropriateFormat(),
                 modifier = Modifier.padding(start = MaterialTheme.spacing.small8),
-                style = TextStyle(
-                    fontSize = MaterialTheme.typography.bodyMedium.fontSize,
-                    fontWeight = FontWeight.W400,
-                    color = Color(0x2F2E30FF)
-                ),
+                style = MaterialTheme.typography.bodyMedium,
             )
             Spacer(Modifier.height(MaterialTheme.spacing.medium16))
-            Button(
-                enabled = !disabled.value,
+            FilledButton(
+                //enabled = !disabled.value,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(MaterialTheme.sizing.medium40)
-                    .padding(horizontal = MaterialTheme.spacing.small8),
+                    .padding(
+                        start = MaterialTheme.spacing.small8,
+                        end = MaterialTheme.spacing.small8,
+                        bottom = MaterialTheme.spacing.small8
+                    ),
                 onClick = {
-                        onBuyButtonClick(house)
-                    disabled.value = true
-                          },
-            ) {
-                Text(
-                    text = stringResource(R.string.buy_now),
-                    style = TextStyle(
-                        fontSize = MaterialTheme.typography.labelLarge.fontSize,
-                        fontWeight = FontWeight.W500
-                    )
-                )
-            }
+                    onBuyButtonClick()
+//                    disabled = true
+                },
+                textId = R.string.buy_now
+            )
 
         }
 

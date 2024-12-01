@@ -11,7 +11,13 @@
     <string name="advanced_filter">Advanced filter</string>
     <string name="loading_generation_data">Loading generation data</string>
     <string name="customize_filters_subtitle">Customize your generation creation by selecting specific house features.</string>
+    <string name="customize_search_subtitle">Customize your search by selecting specific house features.</string>
     <string name="select_all">Select all</string>
-    <string name="cancel">cancel</string>
+    <string name="cancel">Cancel</string>
     <string name="apply">apply</string>
+    <string name="clear_filters">Clear filters</string>
+    <string name="data_not_available">Data is not available right now</string>
+    <string name="filter_blocking_all_results">Filters are blocking all the results</string>
+    <string name="loading_available_houses">Loading available houses</string>
+    <string name="customize_search">Customize search</string>
 </resources>

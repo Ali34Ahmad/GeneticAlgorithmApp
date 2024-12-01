@@ -54,7 +54,8 @@ fun GenerationSection(
                 NoDataAvailable(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(MaterialTheme.spacing.medium24)
+                        .padding(MaterialTheme.spacing.medium24),
+                    text = R.string.data_not_available,
                 )
             } else {
                 Column {

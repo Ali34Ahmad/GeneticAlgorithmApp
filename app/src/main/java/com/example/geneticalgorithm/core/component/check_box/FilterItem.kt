@@ -2,6 +2,7 @@ package com.example.geneticalgorithm.core.component.check_box
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -26,14 +27,16 @@ import com.example.geneticalgorithm.presentation.ui.theme.sizing
 fun FilterItem(
     filterItemData: FilterItemData,
     onCheckedChanged: (FilterItemData) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    innerPadding:PaddingValues= PaddingValues(0.dp),
 ) {
-
+    val paddingModifier=Modifier.padding(paddingValues = innerPadding)
     Row(
-        modifier = modifier.height(MaterialTheme.sizing.medium52)
+        modifier = modifier
             .clickable{
                 onCheckedChanged(filterItemData)
-            },
+            }
+            .then(paddingModifier),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start,
     ) {

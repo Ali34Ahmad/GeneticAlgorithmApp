@@ -16,11 +16,13 @@ import com.example.geneticalgorithm.presentation.ui.theme.GeneticAlgorithmTheme
 fun FilledButton(
     onClick: () -> Unit,
     @StringRes textId: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isDisable:Boolean=false,
 ) {
     Button(
         modifier = modifier,
-        onClick = onClick
+        onClick = onClick,
+        enabled = !isDisable,
     ) {
         Text(text = stringResource(id = textId))
     }

@@ -21,7 +21,7 @@ class GeneticAlgorithm {
          */
         fun calculateFitness(house: House): Int {
             //If the house contains prohibited features it will be undesirable.
-            if(house.containsProhibitedFeatures())
+            if (house.containsProhibitedFeatures())
                 return 0
 
             val numberOfRoomsFitness = HouseFitness.numberOfRooms[house.numberOfRooms] ?: 0
@@ -39,16 +39,20 @@ class GeneticAlgorithm {
          *  It is considered as the goal fitness that will stop the Algorithm from working.
          * @author Ali Mansoura.
          */
-        fun getTheTargetFitness(): Int {
+        fun getTheTargetFitness(
+            prohibitedTypes: List<HouseFeature.HouseType> = ProhibitedFeatures.prohibitedTypes,
+            prohibitedLocations: List<HouseFeature.Location> = ProhibitedFeatures.prohibitedLocations,
+            prohibitedNumberOfRooms: List<HouseFeature.NumberOfRooms> = ProhibitedFeatures.prohibitedNumberOfRooms,
+        ): Int {
             //first we remove the unacceptable features
-            val types = HouseFitness.types - ProhibitedFeatures.prohibitedTypes.toSet()
-            val locations = HouseFitness.locations - ProhibitedFeatures.prohibitedLocations.toSet()
-            val numberOfRooms = HouseFitness.numberOfRooms - ProhibitedFeatures.prohibitedNumberOfRooms.toSet()
+            val types = HouseFitness.types - prohibitedTypes.toSet()
+            val locations = HouseFitness.locations - prohibitedLocations.toSet()
+            val numberOfRooms = HouseFitness.numberOfRooms - prohibitedNumberOfRooms.toSet()
 
             //then we got the maximum fitness of each feature
-            val maxTypesFitness = types.maxOf { it.value }
-            val maxLocationFitness = locations.maxOf { it.value }
-            val maxNumberOfRoomsFitness = numberOfRooms.maxOf { it.value }
+            val maxTypesFitness = types.maxOfOrNull { it.value }?:0
+            val maxLocationFitness = locations.maxOfOrNull { it.value }?:0
+            val maxNumberOfRoomsFitness = numberOfRooms.maxOfOrNull { it.value }?:0
 
             return maxTypesFitness + maxLocationFitness + maxNumberOfRoomsFitness
         }
@@ -87,7 +91,13 @@ class GeneticAlgorithm {
             val type = HouseFeature.HouseType.entries.random()
             val numberOfRooms = HouseFeature.NumberOfRooms.entries.random()
 
-            return Individual(House(location = location, type = type, numberOfRooms = numberOfRooms))
+            return Individual(
+                House(
+                    location = location,
+                    type = type,
+                    numberOfRooms = numberOfRooms
+                )
+            )
         }
 
         /**
