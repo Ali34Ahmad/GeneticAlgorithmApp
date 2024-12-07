@@ -5,7 +5,6 @@ import com.example.geneticalgorithm.core.models.HouseFeature
 import com.example.geneticalgorithm.core.models.Individual
 import org.example.dataset.HouseFitness
 import org.example.dataset.ProhibitedFeatures
-import kotlin.random.Random
 
 class GeneticAlgorithm {
     companion object {
@@ -40,14 +39,12 @@ class GeneticAlgorithm {
          * @author Ali Mansoura.
          */
         fun getTheTargetFitness(
-            prohibitedTypes: List<HouseFeature.HouseType> = ProhibitedFeatures.prohibitedTypes,
-            prohibitedLocations: List<HouseFeature.Location> = ProhibitedFeatures.prohibitedLocations,
-            prohibitedNumberOfRooms: List<HouseFeature.NumberOfRooms> = ProhibitedFeatures.prohibitedNumberOfRooms,
+
         ): Int {
             //first we remove the unacceptable features
-            val types = HouseFitness.types - prohibitedTypes.toSet()
-            val locations = HouseFitness.locations - prohibitedLocations.toSet()
-            val numberOfRooms = HouseFitness.numberOfRooms - prohibitedNumberOfRooms.toSet()
+            val types = HouseFitness.types - ProhibitedFeatures.prohibitedTypes.toSet()
+            val locations = HouseFitness.locations - ProhibitedFeatures.prohibitedLocations.toSet()
+            val numberOfRooms = HouseFitness.numberOfRooms - ProhibitedFeatures.prohibitedNumberOfRooms.toSet()
 
             //then we got the maximum fitness of each feature
             val maxTypesFitness = types.maxOfOrNull { it.value }?:0

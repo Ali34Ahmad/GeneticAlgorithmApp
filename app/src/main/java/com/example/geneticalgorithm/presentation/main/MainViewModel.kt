@@ -14,8 +14,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.example.genetic_algorithm.GeneticAlgorithm
-import org.example.genetic_algorithm.GeneticAlgorithm.Companion
+import org.example.dataset.HouseFitness
+import org.example.dataset.ProhibitedFeatures
 import org.example.genetic_algorithm.GeneticAlgorithm.Companion.POPULATION_SIZE
 import org.example.genetic_algorithm.GeneticAlgorithm.Companion.createInitialGeneration
 import org.example.genetic_algorithm.GeneticAlgorithm.Companion.getTheTargetFitness
@@ -33,28 +33,13 @@ class MainViewModel : ViewModel() {
     }
 
     private suspend fun createInitGeneration() {
-        val prohibitedLocation = uiState.value.algorithmFiltersDialogLocationItems
-            .filter { !it.isChecked }
-            .map { it.toLocationHouseFeatureData() }
-        val prohibitedTypes = uiState.value.algorithmFiltersDialogTypeItems
-            .filter { !it.isChecked }
-            .map { it.toHouseTypeHouseFeatureData() }
-        val prohibitedNumberOfRooms = uiState.value.algorithmFiltersDialogNumberOfRoomsItems
-            .filter { !it.isChecked }
-            .map { it.toNumberOfRoomsHouseFeatureData() }
-
-
         updateIsGenerationLoading(true)
         delay(5000L)
         _uiState.update {
             it.copy(
                 generationNumber = 1,
                 generation = createInitialGeneration(),
-                targetFitness = getTheTargetFitness(
-                    prohibitedLocations = prohibitedLocation,
-                    prohibitedTypes = prohibitedTypes,
-                    prohibitedNumberOfRooms = prohibitedNumberOfRooms
-                ),
+                targetFitness = getTheTargetFitness(),
             )
         }
         updateIsGenerationLoading(false)
@@ -102,13 +87,15 @@ class MainViewModel : ViewModel() {
         updateLocationStatisticsDrafts(index)
         updateTypeStatisticsDrafts(index)
         updateNumberOfRoomsStatisticsDrafts(index)
+        val house = uiState.value.availableHouses[index]
+        HouseFitness.updateFitness(house.toHouse())
     }
 
     private fun updateLocationStatisticsDrafts(index: Int) {
         val locationItems: List<PieChartDetailsItem> =
             uiState.value.pieChartLocationDetails.map { pieChartDetailsItem ->
                 if (pieChartDetailsItem.name.toEnumName() == uiState.value.availableHouses[index].location.name) {
-                    pieChartDetailsItem.copy(numberOfSales = pieChartDetailsItem.numberOfSales + 10)
+                    pieChartDetailsItem.copy(numberOfSales = pieChartDetailsItem.numberOfSales + 1)
                 } else {
                     pieChartDetailsItem
                 }
@@ -120,7 +107,7 @@ class MainViewModel : ViewModel() {
         val typeItems: List<PieChartDetailsItem> =
             uiState.value.pieChartTypeDetails.map { pieChartDetailsItem ->
                 if (pieChartDetailsItem.name.toEnumName() == uiState.value.availableHouses[index].type.name) {
-                    pieChartDetailsItem.copy(numberOfSales = pieChartDetailsItem.numberOfSales + 10)
+                    pieChartDetailsItem.copy(numberOfSales = pieChartDetailsItem.numberOfSales + 1)
                 } else {
                     pieChartDetailsItem
                 }
@@ -132,7 +119,7 @@ class MainViewModel : ViewModel() {
         val numberOfRoomItems: List<PieChartDetailsItem> =
             uiState.value.pieChartRoomsDetails.map { pieChartDetailsItem ->
                 if (pieChartDetailsItem.name.toNumberOfRoomsEnumName() == uiState.value.availableHouses[index].numberOfRooms.name) {
-                    pieChartDetailsItem.copy(numberOfSales = pieChartDetailsItem.numberOfSales + 10)
+                    pieChartDetailsItem.copy(numberOfSales = pieChartDetailsItem.numberOfSales + 1)
                 } else {
                     pieChartDetailsItem
                 }
@@ -405,28 +392,15 @@ class MainViewModel : ViewModel() {
     }
 
     fun algorithmFiltersConfirmButtonClick() {
-        val prohibitedLocation = uiState.value.algorithmFiltersDialogLocationItems
-            .filter { !it.isChecked }
-            .map { it.toLocationHouseFeatureData() }
-        val prohibitedTypes = uiState.value.algorithmFiltersDialogTypeItems
-            .filter { !it.isChecked }
-            .map { it.toHouseTypeHouseFeatureData() }
-        val prohibitedNumberOfRooms = uiState.value.algorithmFiltersDialogNumberOfRoomsItems
-            .filter { !it.isChecked }
-            .map { it.toNumberOfRoomsHouseFeatureData() }
-
         viewModelScope.launch {
+            updateProhibitedFeatures()
             updateIsGenerationLoading(true)
             delay(5000L)
             _uiState.update {
                 it.copy(
                     generation = createInitialGeneration(),
                     generationNumber = 1,
-                    targetFitness = getTheTargetFitness(
-                        prohibitedLocations = prohibitedLocation,
-                        prohibitedTypes = prohibitedTypes,
-                        prohibitedNumberOfRooms = prohibitedNumberOfRooms
-                    ),
+                    targetFitness = getTheTargetFitness(),
                 )
             }
             updateIsGenerationLoading(false)
@@ -523,7 +497,28 @@ class MainViewModel : ViewModel() {
         return true
     }
 
+    private fun updateProhibitedFeatures(){
+        val prohibitedNumberOfRooms = uiState.value.algorithmFiltersDialogNumberOfRoomsItems
+            .filter { !it.isChecked }
+            .map {
+                it.toNumberOfRoomsHouseFeatureData()
+            }
+        val prohibitedLocations = uiState.value.algorithmFiltersDialogLocationItems
+            .filter { !it.isChecked }
+            .map {
+                it.toLocationHouseFeatureData()
+            }
+        val prohibitedTypes= uiState.value.algorithmFiltersDialogTypeItems
+            .filter { !it.isChecked }
+            .map {
+                it.toHouseTypeHouseFeatureData()
+            }
 
+        ProhibitedFeatures.updateProhibitedNumberOfRooms(prohibitedNumberOfRooms)
+        ProhibitedFeatures.updateProhibitedLocations(prohibitedLocations)
+        ProhibitedFeatures.updateProhibitedTypes(prohibitedTypes)
+
+    }
     fun runAlgorithm() {
         viewModelScope.launch {
             if (shouldRefreshStatistics()) {

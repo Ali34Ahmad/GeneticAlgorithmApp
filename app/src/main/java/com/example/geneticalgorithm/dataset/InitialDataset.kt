@@ -29,7 +29,7 @@ internal object InitialDataset {
         HouseFeature.NumberOfRooms.R7 to 10,
         HouseFeature.NumberOfRooms.R8 to 3,
     )
-    val prohibitedNumberOfRooms = listOf(HouseFeature.NumberOfRooms.R7)
-    val prohibitedLocations = listOf(HouseFeature.Location.RURAL)
-    val prohibitedTypes = listOf(HouseFeature.HouseType.VILLA)
+    val prohibitedNumberOfRooms = emptyList<HouseFeature.NumberOfRooms>()
+    val prohibitedLocations = emptyList<HouseFeature.Location>()
+    val prohibitedTypes = emptyList<HouseFeature.HouseType>()
 }
