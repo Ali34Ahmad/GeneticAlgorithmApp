@@ -571,6 +571,17 @@ class MainViewModel : ViewModel() {
 
                 bestFitness = currentGeneration.first().fitness
 
+                if (currentGeneration.none { it.fitness != 0 }){
+                    _uiState.update {
+                        it.copy(
+                            generation = currentGeneration,
+                            generationNumber = generationCount + 1,
+                        )
+                    }
+                    updateIsWorkingOnNextGeneration(false)
+                    break
+                }
+
                 updateIsGenerationLoading(true)
                 updateIsWorkingOnNextGeneration(false)
                 delay(5000L)

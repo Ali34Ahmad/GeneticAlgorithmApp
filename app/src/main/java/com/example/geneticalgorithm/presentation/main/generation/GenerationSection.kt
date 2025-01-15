@@ -50,12 +50,12 @@ fun GenerationSection(
                         .fillMaxWidth()
                         .padding(MaterialTheme.spacing.medium24)
                 )
-            } else if (uiState.generation.isEmpty()) {
+            } else if (uiState.generation.none { it.fitness != 0 }) {
                 NoDataAvailable(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(MaterialTheme.spacing.medium24),
-                    text = R.string.data_not_available,
+                    text = R.string.filter_blocking_all_results,
                 )
             } else {
                 Column {
