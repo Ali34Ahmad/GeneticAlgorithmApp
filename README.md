@@ -46,7 +46,7 @@ This evolutionary approach allows the app to find excellent recommendations with
 </table>
 
 Getting Started
-* Clone the repository: ```git clone https://github.com/Ali34Ahmad/GeneticAlgorithmApp.git```
+* Clone the repository: ```git clone https://github.com/Ali34Ahmad/Real-Estate-Recommender```
 
 * Open the project in Android Studio.
 
