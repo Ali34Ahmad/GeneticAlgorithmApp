@@ -35,6 +35,16 @@ This evolutionary approach allows the app to find excellent recommendations with
 
 * Algorithm: Genetic Algorithm
 
+## Screenshots of the app:
+<table>
+<tr>
+<td><img width="640" height="1280" alt="image" src="https://github.com/user-attachments/assets/7eddc9b5-adee-4ad9-9daa-9202d59b137a" /></td>
+<td><img width="640" height="1280" alt="image" src="https://github.com/user-attachments/assets/b9c83c76-4e94-43eb-b39b-f76f62167f6c" /></td>
+<td><img width="640" height="1280" alt="image" src="https://github.com/user-attachments/assets/0b6a8855-ac67-4af5-98db-752201b25ff1" /></td>
+<td><img width="640" height="1280" alt="image" src="https://github.com/user-attachments/assets/3f2d0ec6-bc4f-472c-a2bc-21966e025707" /></td>
+</tr>
+</table>
+
 Getting Started
 * Clone the repository: ```git clone https://github.com/Ali34Ahmad/GeneticAlgorithmApp.git```
 
@@ -43,3 +53,5 @@ Getting Started
 * Build and run the app on an Android emulator or a physical device.
 
 Feel free to open an issue or submit a pull request if you'd like to contribute.
+
+
